@@ -6,9 +6,39 @@ $(function () {
         const todos = $list.children().map(function () {
             return $(this).text();
         }).get();
+        const savedTodos = JSON.stringify(todos);
 
-        document.cookie = cookieName + "=" + encodeURIComponent(JSON.stringify(todos)) +
+        try {
+            localStorage.setItem(cookieName, savedTodos);
+        } catch (error) {
+            // Storage may be unavailable when the page is opened as a local file.
+        }
+
+        document.cookie = cookieName + "=" + encodeURIComponent(savedTodos) +
             "; path=/; max-age=31536000";
+    }
+
+    function loadTodos() {
+        try {
+            const todos = JSON.parse(localStorage.getItem(cookieName));
+            if (Array.isArray(todos)) return todos;
+        } catch (error) {
+            // Fall back to the cookie if local storage is unavailable or invalid.
+        }
+
+        const savedCookie = document.cookie.split("; ")
+            .find((row) => row.startsWith(cookieName + "="));
+
+        if (savedCookie) {
+            try {
+                const todos = JSON.parse(decodeURIComponent(savedCookie.slice(cookieName.length + 1)));
+                if (Array.isArray(todos)) return todos;
+            } catch (error) {
+                // Ignore an invalid or outdated todo cookie.
+            }
+        }
+
+        return [];
     }
 
     function addTodo(text, addToTop) {
@@ -31,15 +61,5 @@ $(function () {
         }
     });
 
-    const savedCookie = document.cookie.split("; ")
-        .find((row) => row.startsWith(cookieName + "="));
-
-    if (savedCookie) {
-        try {
-            const savedTodos = JSON.parse(decodeURIComponent(savedCookie.slice(cookieName.length + 1)));
-            if (Array.isArray(savedTodos)) savedTodos.forEach((todo) => addTodo(String(todo), false));
-        } catch (error) {
-            // Ignore an invalid or outdated todo cookie.
-        }
-    }
+    loadTodos().forEach((todo) => addTodo(String(todo), false));
 });
