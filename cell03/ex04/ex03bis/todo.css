@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+}
+
+#new {
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+#ft_list {
+    margin-top: 20px;
+}
+
+#ft_list div {
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+}
