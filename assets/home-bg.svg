@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Portfolio homepage background</title>
+  <desc id="desc">A soft abstract background with purple, green, and peach shapes.</desc>
+  <rect width="1600" height="1000" fill="#f5f4f0"/>
+  <circle cx="180" cy="170" r="260" fill="#cbbcff" opacity=".26"/>
+  <circle cx="1430" cy="150" r="320" fill="#c9e6b8" opacity=".34"/>
+  <circle cx="1240" cy="900" r="360" fill="#f3c39b" opacity=".28"/>
+  <path d="M0 760c250-190 430-210 690-70s490 130 910-120v430H0z" fill="#cbbcff" opacity=".14"/>
+  <path d="M0 80c280 130 520 130 790 0s520-110 810 50v110H0z" fill="#f3c39b" opacity=".12"/>
+  <path d="M250 1000 720 0h120L370 1000z" fill="#1d1c20" opacity=".035"/>
+</svg>
